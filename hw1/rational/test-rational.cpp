@@ -8,6 +8,17 @@ using namespace std;
  *  member and non-member functions such that the following program
  *	compiles and produces the correct output.
  */
+
+std::ostream& operator<<(std::ostream& ostr, const Rational& r) {
+    ostr << r.n << '/' << r.d;
+    return ostr;
+}
+
+std::istream& operator>>(std::istream& istr, Rational& r) {
+    istr >> r.n >> r.d;
+    return istr;
+}
+
 int main()
 {
     cout << "Constructor and insertion and extraction operators:" << endl;
