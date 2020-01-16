@@ -16,10 +16,38 @@ Rational::Rational(int num, int denom)
 }
 
 static int Rational::gcd(int a, int b) {
-
+	if (b < a) { //swap so that a is the smaller number
+		int temp = b;
+		b = a;
+		a = temp;
+	}
+	int gcd = 1;
+	for (int i=a; i>0; i--) {
+		if (!(b%i) && !(a%i)) {
+			gcd = i;
+			break;
+		}
+	}
+	return gcd;
 }
 
 static int Rational::lcm(int a, int b) {
+	if (b < a) { //swap so that a is the smaller number
+		int temp = b;
+		b = a;
+		a = temp;
+	}
+	int lcm = a*b;
+	for (int i=b; i<=a*b; i++) {
+		if (!(i%a) && !(i%b)) {
+			lcm = i;
+			break;
+		}
+	}
+	return lcm;
+}
+
+void Rational::reduce(){
 
 }
 
