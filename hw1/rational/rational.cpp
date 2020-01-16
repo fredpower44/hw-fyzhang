@@ -18,6 +18,8 @@ Rational::Rational(int num, int denom)
 }
 
 static int Rational::gcd(int a, int b) {
+	if (a < 0) a *= -1; //take abs value
+	if (b < 0) b *= -1;
 	if (b < a) { //swap so that a is the smaller number
 		int temp = b;
 		b = a;
@@ -34,6 +36,8 @@ static int Rational::gcd(int a, int b) {
 }
 
 static int Rational::lcm(int a, int b) {
+	if (a < 0) a *= -1; //take abs value
+	if (b < 0) b *= -1;
 	if (b < a) { //swap so that a is the smaller number
 		int temp = b;
 		b = a;
@@ -49,10 +53,14 @@ static int Rational::lcm(int a, int b) {
 	return lcm;
 }
 
-void Rational::reduce(){
-	int lcm = lcm(n,d);
-	n /= lcm;
-	d /= lcm;
+void Rational::reduce() {
+	if (d < 0) {
+		n *= -1;
+		d *= -1;
+	} 
+	int gcd = gcd(n,d);
+	n /= gcd;
+	d /= gcd;
 }
 
 void Rational::normalize0()
