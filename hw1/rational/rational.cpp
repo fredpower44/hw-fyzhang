@@ -13,6 +13,7 @@ Rational::Rational(int num, int denom)
     // You should likely call this->reduce() and this->normalize0()
     n = num;
     d = denom;
+    normalize0();
 }
 
 static int Rational::gcd(int a, int b) {
@@ -48,11 +49,9 @@ static int Rational::lcm(int a, int b) {
 }
 
 void Rational::reduce(){
-
-}
-
-void Rational::normalize0() {
-
+	int lcm = lcm(n,d);
+	n /= lcm;
+	d /= lcm;
 }
 
 void Rational::normalize0()
