@@ -13,7 +13,8 @@ Rational::Rational(int num, int denom)
     // You should likely call this->reduce() and this->normalize0()
     n = num;
     d = denom;
-    normalize0();
+    this->reduce();
+    this->normalize0();
 }
 
 static int Rational::gcd(int a, int b) {
