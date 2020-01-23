@@ -15,8 +15,28 @@ std::ostream& operator<<(std::ostream& ostr, const Rational& r) {
 }
 
 std::istream& operator>>(std::istream& istr, Rational& r) {
-    istr >> r.n >> r.d;
+    char buf;
+    istr >> r.n;
+    if (istr.fail()) {
+        r.n = 0;
+    }
+    istr >> buf >> r.d;
+    Rational temp(r.n, r.d);
+    r.n = temp.n;
+    r.d = temp.d;
     return istr;
+}
+
+Rational operator+(const int &n, const Rational &r2) {
+
+}
+
+Rational operator+(const Rational &r1, const int &n) {
+
+}
+
+Rational operator+(const Rational &r1, const Rational &r2) {
+
 }
 
 int main()
