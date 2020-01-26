@@ -127,6 +127,16 @@ bool Rational::operator==(Rational r) {
 	return ((temp.n == r.n) && (temp.d == r.d));
 }
 
+bool Rational::operator!=(Rational r) {
+	Rational temp(n, d);
+	r.reduce();
+	return !((temp.n == r.n) && (temp.d == r.d));
+}
+
+bool Rational::operator<(Rational r) {
+	return n*r.d < r.n*d;
+}
+
 Rational Rational::operator=(const Rational &r) {
 	n = r.n;
 	d = d.n;

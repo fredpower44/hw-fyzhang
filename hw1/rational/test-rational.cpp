@@ -28,15 +28,11 @@ std::istream& operator>>(std::istream& istr, Rational& r) {
 }
 
 Rational operator+(const int &n, const Rational &r2) {
-
+    return (r2 + n);
 }
 
-Rational operator+(const Rational &r1, const int &n) {
-
-}
-
-Rational operator+(const Rational &r1, const Rational &r2) {
-
+Rational operator*(const int &n, const Rational &r2) {
+    return (r2 * n);
 }
 
 int main()
