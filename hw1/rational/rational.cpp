@@ -91,6 +91,7 @@ Rational Rational::operator*(const Rational &r) {
 	Rational result(num, den);
 	result.reduce();
 	result.normalize0();
+	return result;
 }
 
 Rational Rational::operator*(const int &x) {
@@ -98,11 +99,43 @@ Rational Rational::operator*(const int &x) {
 	Rational result(num, d);
 	result.reduce();
 	result.normalize0();
+	return result;
 }
 
-Rational Rational::operator^(const Rational &r);
-Rational Rational::operator^(const int &x);
-Rational Rational::operator==(const Rational &r);
-Rational Rational::operator==(const int &x);
-Rational Rational::operator=(const Rational &r);
-Rational Rational::operator=(const int &x);
+Rational Rational::operator^(const int &x) {
+	int num = 1;
+	int den = 1;
+	for (int i=0; ((i<x) || (i>(-1 * x))); i++) {
+		num *= n;
+		den *= d;
+	}
+	if (x < 0) {
+		int temp = num;
+		num = den;
+		den = temp;
+	}
+	Rational result(num, den);
+	result.reduce();
+	result.normalize0();
+	return result;
+
+}
+
+bool Rational::operator==(Rational r) {
+	Rational temp(n, d);
+	r.reduce();
+	return ((temp.n == r.n) && (temp.d == r.d));
+}
+
+Rational Rational::operator=(const Rational &r) {
+	n = r.n;
+	d = d.n;
+	result.reduce();
+	result.normalize0();
+	return *this;
+}
+Rational Rational::operator=(const int &x) {
+	n = x;
+	d = 1;
+	return *this;
+}
