@@ -68,3 +68,41 @@ void Rational::normalize0()
     if (n == 0 && d != 1) d = 1;
 }
 
+Rational Rational::operator+(const Rational &r) {
+	int num = n * r.d + r.n * d;
+	int den = d * r.d;
+	Rational result(num, den);
+	result.reduce();
+	result.normalize0();
+	return result;
+}
+
+Rational Rational::operator+(const int &x) {
+	int num = n + d * x;
+	Rational result(num, den);
+	result.reduce();
+	result.normalize0;
+	return result;
+}
+
+Rational Rational::operator*(const Rational &r) {
+	int num = r.n * n;
+	int den = r.d * d;
+	Rational result(num, den);
+	result.reduce();
+	result.normalize0();
+}
+
+Rational Rational::operator*(const int &x) {
+	int num = r.n * x;
+	Rational result(num, d);
+	result.reduce();
+	result.normalize0();
+}
+
+Rational Rational::operator^(const Rational &r);
+Rational Rational::operator^(const int &x);
+Rational Rational::operator==(const Rational &r);
+Rational Rational::operator==(const int &x);
+Rational Rational::operator=(const Rational &r);
+Rational Rational::operator=(const int &x);
