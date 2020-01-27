@@ -7,6 +7,17 @@ using namespace std;
 
 
 
+Square& Square::operator=(SquareValue value) {
+    this->value_ = value_;
+}
+
+bool Square::operator==(SquareValue value) const {
+    return (this->value == value);
+}
+
+bool Square::operator!=(SquareValue value) const {
+    return (this->value != value);
+}
 
 void Square::flip()
 {
