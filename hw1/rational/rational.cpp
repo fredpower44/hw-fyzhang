@@ -85,6 +85,21 @@ Rational Rational::operator+(const int &x) {
 	return result;
 }
 
+Rational Rational::operator+=(const Rational &r) {
+	n = n * r.d + r.n * d;
+	d = d * r.d;
+	reduce();
+	normalize0();
+	return *this;
+}
+
+Rational Rational::operator+=(const int &x) {
+	n += d * x;
+	reduce();
+	normalize0();
+	return *this;
+}
+
 Rational Rational::operator*(const Rational &r) {
 	int num = r.n * n;
 	int den = r.d * d;
@@ -102,10 +117,29 @@ Rational Rational::operator*(const int &x) {
 	return result;
 }
 
+Rational Rational::operator*=(const Rational &r) {
+	n *= r.n;
+	d *= r.d;
+	reduce();
+	normalize0();
+	return *this;
+}
+
+Rational Rational::operator*=(const int &x) {
+	n *= x;
+	reduce();
+	normalize0();
+	return *this;
+}
+
 Rational Rational::operator^(const int &x) {
+	int size = x;
+	if (size < 0) {
+		size *= -1;
+	}
 	int num = 1;
 	int den = 1;
-	for (int i=0; ((i<x) && (i>(-1 * x))); i++) {
+	for (int i=0; i<size; i++) {
 		num *= n;
 		den *= d;
 	}

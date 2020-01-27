@@ -49,9 +49,13 @@ public:
 
     Rational operator+(const Rational&);
     Rational operator+(const int&);
+    Rational operator+=(const Rational&);
+    Rational operator+=(const int&);
 
     Rational operator*(const Rational&);
     Rational operator*(const int&);
+    Rational operator*=(const Rational&);
+    Rational operator*=(const int&);
 
     Rational operator^(const int&);
 

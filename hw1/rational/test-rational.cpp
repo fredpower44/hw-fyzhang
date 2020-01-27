@@ -75,10 +75,10 @@ int main()
 
     Rational r5c1 = r5, r5c2 = r5, r5c3 = r5, r5c4 = r5;
     cout << "Assignment checks: " << endl;
-//    cout << (r5c1 += rne3) << endl;
-//    cout << (r5c2 += 5) << endl;
-//    cout << (r5c3 *= r2) << endl;
-//    cout << (r5c4 *= 3) << endl;
+    cout << (r5c1 += rne3) << endl;
+    cout << (r5c2 += 5) << endl;
+    cout << (r5c3 *= r2) << endl;
+    cout << (r5c4 *= 3) << endl;
 
     Rational r6a(2,4), r6b(-4,8);
     cout << "Normalized 0 check: " << endl;
