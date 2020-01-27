@@ -47,20 +47,20 @@ public:
 
     // Add additional function prototypes here
 
-    Rational operator+(const Rational &r);
-    Rational operator+(const int &n);
+    Rational operator+(const Rational&);
+    Rational operator+(const int&);
 
-    Rational operator*(const Rational &r);
-    Rational operator*(const int &n);
+    Rational operator*(const Rational&);
+    Rational operator*(const int&);
 
-    Rational operator^(const Rational &r);
-    Rational operator^(const int &n);
+    Rational operator^(const int&);
 
-    Rational operator==(const Rational &r);
-    Rational operator==(const int &n);
+    bool operator==(const Rational&);
+    bool operator!=(const Rational&);
+    bool operator<(const Rational&);
 
-    Rational operator=(const Rational &r);
-    Rational operator=(const int &n);
+    Rational operator=(const Rational&);
+    Rational operator=(const int&);
 
 private:
     // Private helper functions that you must implement

@@ -21,17 +21,16 @@ std::istream& operator>>(std::istream& istr, Rational& r) {
         r.n = 0;
     }
     istr >> buf >> r.d;
-    Rational temp(r.n, r.d);
-    r.n = temp.n;
-    r.d = temp.d;
+    r.reduce();
+    r.normalize0();
     return istr;
 }
 
-Rational operator+(const int &n, const Rational &r2) {
+Rational operator+(int n, Rational r2) {
     return (r2 + n);
 }
 
-Rational operator*(const int &n, const Rational &r2) {
+Rational operator*(int n, Rational r2) {
     return (r2 * n);
 }
 
@@ -76,10 +75,10 @@ int main()
 
     Rational r5c1 = r5, r5c2 = r5, r5c3 = r5, r5c4 = r5;
     cout << "Assignment checks: " << endl;
-    cout << (r5c1 += rne3) << endl;
-    cout << (r5c2 += 5) << endl;
-    cout << (r5c3 *= r2) << endl;
-    cout << (r5c4 *= 3) << endl;
+//    cout << (r5c1 += rne3) << endl;
+//    cout << (r5c2 += 5) << endl;
+//    cout << (r5c3 *= r2) << endl;
+//    cout << (r5c4 *= 3) << endl;
 
     Rational r6a(2,4), r6b(-4,8);
     cout << "Normalized 0 check: " << endl;

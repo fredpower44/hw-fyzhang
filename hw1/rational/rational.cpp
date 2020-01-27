@@ -17,7 +17,7 @@ Rational::Rational(int num, int denom)
     this->normalize0();
 }
 
-static int Rational::gcd(int a, int b) {
+int Rational::gcd(int a, int b) {
 	if (a < 0) a *= -1; //take abs value
 	if (b < 0) b *= -1;
 	if (b < a) { //swap so that a is the smaller number
@@ -35,7 +35,7 @@ static int Rational::gcd(int a, int b) {
 	return gcd;
 }
 
-static int Rational::lcm(int a, int b) {
+int Rational::lcm(int a, int b) {
 	if (a < 0) a *= -1; //take abs value
 	if (b < 0) b *= -1;
 	if (b < a) { //swap so that a is the smaller number
@@ -58,9 +58,9 @@ void Rational::reduce() {
 		n *= -1;
 		d *= -1;
 	} 
-	int gcd = gcd(n,d);
-	n /= gcd;
-	d /= gcd;
+	int x = gcd(n,d);
+	n /= x;
+	d /= x;
 }
 
 void Rational::normalize0()
@@ -79,9 +79,9 @@ Rational Rational::operator+(const Rational &r) {
 
 Rational Rational::operator+(const int &x) {
 	int num = n + d * x;
-	Rational result(num, den);
+	Rational result(num, d);
 	result.reduce();
-	result.normalize0;
+	result.normalize0();
 	return result;
 }
 
@@ -95,7 +95,7 @@ Rational Rational::operator*(const Rational &r) {
 }
 
 Rational Rational::operator*(const int &x) {
-	int num = r.n * x;
+	int num = n * x;
 	Rational result(num, d);
 	result.reduce();
 	result.normalize0();
@@ -105,7 +105,7 @@ Rational Rational::operator*(const int &x) {
 Rational Rational::operator^(const int &x) {
 	int num = 1;
 	int den = 1;
-	for (int i=0; ((i<x) || (i>(-1 * x))); i++) {
+	for (int i=0; ((i<x) && (i>(-1 * x))); i++) {
 		num *= n;
 		den *= d;
 	}
@@ -121,27 +121,27 @@ Rational Rational::operator^(const int &x) {
 
 }
 
-bool Rational::operator==(Rational r) {
-	Rational temp(n, d);
-	r.reduce();
-	return ((temp.n == r.n) && (temp.d == r.d));
+bool Rational::operator==(const Rational &r) {
+	Rational temp(r.n, r.d);
+	reduce();
+	return ((temp.n == n) && (temp.d == d));
 }
 
-bool Rational::operator!=(Rational r) {
-	Rational temp(n, d);
-	r.reduce();
-	return !((temp.n == r.n) && (temp.d == r.d));
+bool Rational::operator!=(const Rational &r) {
+	Rational temp(r.n, r.d);
+	reduce();
+	return !((temp.n == n) && (temp.d == d));
 }
 
-bool Rational::operator<(Rational r) {
+bool Rational::operator<(const Rational &r) {
 	return n*r.d < r.n*d;
 }
 
 Rational Rational::operator=(const Rational &r) {
 	n = r.n;
-	d = d.n;
-	result.reduce();
-	result.normalize0();
+	d = r.d;
+	reduce();
+	normalize0();
 	return *this;
 }
 Rational Rational::operator=(const int &x) {
