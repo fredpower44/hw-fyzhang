@@ -51,7 +51,24 @@ Square::SquareValue opposite_color(Square::SquareValue value)
 
 
 
+Board::Board(size_t s) {
+    dimension_ = s;
+    squares_ = new Square*[s];
+    for (int i=0; i<s; i++) {
+        Square* temp = new Square[s];
+        for (int j=0; j<s; j++) {
+            temp[j] = 0;
+        }
+        squares_[i] = temp;
+    }
+}
 
+Board::Board~() {
+    for (int i=0; i<dimension_; i++) {
+        delete[] squares[i];
+    }
+    delete[] squares_;
+}
 
 Square& Board::operator()(char row, size_t column)
 {

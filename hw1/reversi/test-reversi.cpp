@@ -28,6 +28,41 @@ std::ostream& operator<<(std::ostream& out, const Square& square) {
     return out;
 }
 
+Square::SquareValue opposite_color(Square::SquareValue value) {
+    if (value == WHITE) {
+        return BLACK;
+    }
+    else if (value == BLACK) {
+        return WHITE;
+    }
+    return 0;
+}
+
+std::ostream& operator<<(std::ostream& out, const Board& board) {
+    if (board.dimension_ > 10) {
+        cout << "  ";
+        for (int i=0; i<board.dimension_; i++) {
+            if (i > 10) {
+                cout << i/10;
+            }
+            else {
+                cout << ' ';
+            }
+        }
+    }
+    cout << "  ";
+    for (int i=0; i<board.dimension_; i++) {
+        cout << i%10;
+    }
+    for (int i=0; i<board.dimension_; i++) {
+        cout << ('a'+i) << ':';
+        for (int j=0; j<board.dimension_; j++) {
+
+        }
+    }
+    return out;
+}
+
 int main(int argc, char* argv[])
 {
     size_t size = 4;
