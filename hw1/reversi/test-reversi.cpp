@@ -16,10 +16,10 @@ using namespace std;
  */
 
 std::ostream& operator<<(std::ostream& out, const Square& square) {
-    if (square_== 0) {
+    if (square == Square::FREE) {
         out << '-';
     }
-    else if (square == WHITE) {
+    else if (square == Square::WHITE) {
         out << 'W';
     }
     else {
@@ -29,13 +29,13 @@ std::ostream& operator<<(std::ostream& out, const Square& square) {
 }
 
 Square::SquareValue opposite_color(Square::SquareValue value) {
-    if (value == WHITE) {
-        return BLACK;
+    if (value == Square::WHITE) {
+        return Square::BLACK;
     }
-    else if (value == BLACK) {
-        return WHITE;
+    else if (value == Square::BLACK) {
+        return Square::WHITE;
     }
-    return 0;
+    return Square::FREE;
 }
 
 std::ostream& operator<<(std::ostream& out, const Board& board) {
@@ -55,11 +55,11 @@ std::ostream& operator<<(std::ostream& out, const Board& board) {
     for (int i=0; i<board.dimension_; i++) {
         cout << i%10;
     }
-    cout << std:endl;
+    cout << std::endl;
     for (int i=0; i<board.dimension_; i++) {
         cout << ('a'+i) << ':';
         for (int j=0; j<board.dimension_; j++) {
-            cout << board.square_[i][j];
+            cout << board.squares_[i][j];
         }
         cout << std::endl;
     }

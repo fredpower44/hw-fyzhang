@@ -9,14 +9,15 @@ using namespace std;
 
 Square& Square::operator=(SquareValue value) {
     this->value_ = value_;
+    return *this;
 }
 
 bool Square::operator==(SquareValue value) const {
-    return (this->value == value);
+    return (this->value_ == value);
 }
 
 bool Square::operator!=(SquareValue value) const {
-    return (this->value != value);
+    return (this->value_ != value);
 }
 
 void Square::flip()
@@ -57,18 +58,18 @@ Board::Board(size_t s) {
     for (int i=0; i<s; i++) {
         Square* temp = new Square[s];
         for (int j=0; j<s; j++) {
-            temp[j] = 0;
+            temp[j] = Square::FREE;
         }
         squares_[i] = temp;
     }
 }
 
-Board::Board~() {
-    for (int i=0; i<dimension_; i++) {
-        delete[] squares[i];
-    }
-    delete[] squares_;
-}
+//Board::Board~() {
+//    for (int i=0; i<dimension_; i++) {
+//        delete[] squares[i];
+//    }
+//    delete[] squares_;
+//}
 
 Square& Board::operator()(char row, size_t column)
 {
