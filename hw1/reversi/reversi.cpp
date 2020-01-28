@@ -62,6 +62,10 @@ Board::Board(size_t s) {
         }
         squares_[i] = temp;
     }
+    squares_[s/2 - 1][s/2 - 1] = Square::BLACK;
+    squares_[s/2][s/2 - 1] = Square::WHITE;
+    squares_[s/2][s/2] = Square::BLACK;
+    squares_[s/2 - 1][s/2] = Square::WHITE;
 }
 
 //Board::Board~() {
@@ -159,7 +163,13 @@ ostream& Board::print(ostream& out) const
     return out;
 }
 
+Reversi::Reversi(size_t size) : board_(Board(size)) {
+    turn_ = Square::BLACK;
+}
 
+void Reversi::play() {
+
+}
 
 void Reversi::prompt() const
 {
@@ -241,5 +251,11 @@ bool Reversi::is_game_over() const
     return true;
 }
 
+void Reversi::save_checkpoint() {
 
+}
+
+void Reversi::undo() {
+    
+}
 

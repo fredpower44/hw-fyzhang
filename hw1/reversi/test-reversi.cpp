@@ -28,15 +28,6 @@ std::ostream& operator<<(std::ostream& out, const Square& square) {
     return out;
 }
 
-Square::SquareValue opposite_color(Square::SquareValue value) {
-    if (value == Square::WHITE) {
-        return Square::BLACK;
-    }
-    else if (value == Square::BLACK) {
-        return Square::WHITE;
-    }
-    return Square::FREE;
-}
 
 std::ostream& operator<<(std::ostream& out, const Board& board) {
     if (board.dimension_ > 10) {
