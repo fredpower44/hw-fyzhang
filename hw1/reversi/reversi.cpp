@@ -78,7 +78,7 @@ Square& Board::operator()(char row, size_t column)
         throw out_of_range("Bad row index");
     }
     size_t row_index = row_to_index(row);
-    return squares_[row_index][column - 1];
+    return squares_[row_index][column - 1]; 
 }
 
 Square const& Board::operator()(char row, size_t column) const
