@@ -168,7 +168,10 @@ Reversi::Reversi(size_t size) : board_(Board(size)) {
 }
 
 void Reversi::play() {
-
+    prompt();
+    char in;
+    std::cin >> in;
+    if (in == '')
 }
 
 void Reversi::prompt() const
@@ -256,6 +259,6 @@ void Reversi::save_checkpoint() {
 }
 
 void Reversi::undo() {
-    
+
 }
 
