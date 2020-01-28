@@ -14,6 +14,20 @@ using namespace std;
  *  Once created, call Reversi::play() on the Reversi
  *  object and then return 0;
  */
+
+std::ostream& operator<<(std::ostream& out, const Square& square) {
+    if (square_== 0) {
+        out << '-';
+    }
+    else if (square == WHITE) {
+        out << 'W';
+    }
+    else {
+        out << 'B';
+    }
+    return out;
+}
+
 int main(int argc, char* argv[])
 {
     size_t size = 4;
