@@ -20,8 +20,12 @@
 	to use friend functions.
 	b. Board
 5.
-	a. Record
-	b. Record
+	a. Rational
+	   Rational
+	   Record
+	b. Copy Rational
+	   Copy Rational
+	   Record
 	c. 
 	Wrapper::Wrapper(const Rational& major, const Rational& overall) : r(Record(major,overall))
 	{
