@@ -27,7 +27,7 @@
 	   Copy Rational
 	   Record
 	c. 
-	Wrapper::Wrapper(const Rational& major, const Rational& overall) : r(Record(major,overall))
+	Wrapper::Wrapper(const Rational& major, const Rational& overall) : r(major,overall)
 	{
 
 	}
