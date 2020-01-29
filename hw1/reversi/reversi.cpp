@@ -198,7 +198,34 @@ void Reversi::play() {
             int col;
             std::cin >> row >> col;
             if (is_legal_choice(row, col, turn_)) {
-
+                const size_t direction_count = 8;
+                const int direction_row[] =    {-1, -1,  0, +1, +1, +1,  0, -1};
+                const int direction_column[] = { 0, -1, -1, -1,  0, +1, +1, +1};
+                // Now check in each directions
+                for (size_t d = 0; d < direction_count; d++) {
+                    // Where we're checking
+                    char cursor_row = row + direction_row[d];
+                    size_t cursor_column = col + direction_column[d];
+                    // Move towards the direction while we're on the opposite color
+                    bool found_opposite = false;
+                    while (board_.is_legal_and_opposite_color(cursor_row, cursor_column, turn_)) {
+                        found_opposite = true;
+                        cursor_row += direction_row[d];
+                        cursor_column += direction_column[d];
+                    }
+                    // Check if the next thing after is our color
+                    bool found_same = board_.is_legal_and_same_color(cursor_row, cursor_column, turn_);
+                    // If this direction is valid, the move is valid, so short circuit and return
+                    if (found_opposite && found_same) {
+                        cursor_row = row + direction_row[d];
+                        cursor_column = col + direction_column[d];
+                        while (board_.is_legal_and_opposite_color(cursor_row, cursor_column, turn_)) {
+                            board_(cursor_row, cursor_column).flip();
+                            cursor_row += direction_row[d];
+                            cursor_column += direction_column[d];
+                        }
+                    }
+                }
 
 
                 turn_ = opposite_color(turn_);
