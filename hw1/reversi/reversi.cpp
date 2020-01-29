@@ -71,7 +71,6 @@ Board::~Board() {
 }
 
 Board::Board(const Board &b) {
-    cout << "COPY" << endl;
     dimension_ = b.dimension_;
     squares_ = new Square*[dimension_];
     for (int i=0; i<dimension_; i++) {
