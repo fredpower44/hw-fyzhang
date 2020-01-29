@@ -65,10 +65,10 @@ Board::Board(size_t s) {
 }
 
 Board::~Board() {
-    //for (int i=0; i<dimension_; i++) {
-    //    delete[] squares_[i];
-    //}
-    //delete[] squares_;
+    for (int i=0; i<dimension_; i++) {
+        delete[] squares_[i];
+    }
+    delete[] squares_;
 }
 
 Board::Board(const Board &b) {
@@ -172,10 +172,10 @@ ostream& Board::print(ostream& out) const
 }
 
 Reversi::Reversi(size_t size) : board_(Board(size)) {
-    board_((size/2 - 1 + 'a'), size/2) = Square::BLACK;
-    board_((size/2 + 'a'), size/2) = Square::WHITE;
-    board_((size/2 + 'a'), size/2 + 1) = Square::BLACK;
-    board_((size/2 - 1 + 'a'), size/2 + 1) = Square::WHITE;
+    board_(size/2 - 1 + 'a', size/2) = Square::BLACK;
+    board_(size/2 + 'a', size/2) = Square::WHITE;
+    board_(size/2 + 'a', size/2 + 1) = Square::BLACK;
+    board_(size/2 - 1 + 'a', size/2 + 1) = Square::WHITE;
     turn_ = Square::BLACK;
 }
 
@@ -231,6 +231,7 @@ void Reversi::play() {
             }
         }
     }
+
 }
 
 void Reversi::prompt() const
