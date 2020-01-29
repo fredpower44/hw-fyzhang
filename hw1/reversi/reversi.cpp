@@ -68,12 +68,12 @@ Board::Board(size_t s) {
     squares_[s/2 - 1][s/2] = Square::WHITE;
 }
 
-//Board::Board~() {
-//    for (int i=0; i<dimension_; i++) {
-//        delete[] squares[i];
-//    }
-//    delete[] squares_;
-//}
+Board::~Board() {
+    for (int i=0; i<dimension_; i++) {
+        delete[] squares_[i];
+    }
+    delete[] squares_;
+}
 
 Square& Board::operator()(char row, size_t column)
 {
