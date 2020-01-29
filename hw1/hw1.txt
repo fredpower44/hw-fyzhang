@@ -9,3 +9,15 @@
 	b1. git add hw1p2b.cpp
 	b2. git log
 	c. git opens the default text editor to prompt you to enter commit message.
+
+3.
+	a. No
+	b. Yes
+	c. No
+
+4.
+	a. Square is a public struct. All of its fields are public, so it is unnecessary
+	to use friend functions.
+	b. Board
+5.
+	a. 
