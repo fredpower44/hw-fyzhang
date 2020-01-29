@@ -8,7 +8,7 @@ using namespace std;
 
 
 Square& Square::operator=(SquareValue value) {
-    this->value_ = value_;
+    this->value_ = value;
     return *this;
 }
 
@@ -62,10 +62,6 @@ Board::Board(size_t s) {
         }
         squares_[i] = temp;
     }
-    squares_[s/2 - 1][s/2 - 1] = Square::BLACK;
-    squares_[s/2][s/2 - 1] = Square::WHITE;
-    squares_[s/2][s/2] = Square::BLACK;
-    squares_[s/2 - 1][s/2] = Square::WHITE;
 }
 
 Board::~Board() {
@@ -73,6 +69,18 @@ Board::~Board() {
         delete[] squares_[i];
     }
     delete[] squares_;
+}
+
+Board::Board(const Board &b) {
+    dimension_ = b.dimension_;
+    squares_ = new Square*[dimension_];
+    for (int i=0; i<dimension_; i++) {
+        Square* temp = new Square[dimension_];
+        for (int j=0; j<dimension_; j++) {
+            temp[j] = b.squares_[i][j];
+        }
+        squares_[i] = temp;
+    }
 }
 
 Square& Board::operator()(char row, size_t column)
@@ -164,14 +172,39 @@ ostream& Board::print(ostream& out) const
 }
 
 Reversi::Reversi(size_t size) : board_(Board(size)) {
+    board_((size/2 - 1 + 'a'), size/2) = Square::BLACK;
+    board_((size/2 + 'a'), size/2) = Square::WHITE;
+    board_((size/2 + 'a'), size/2 + 1) = Square::BLACK;
+    board_((size/2 - 1 + 'a'), size/2 + 1) = Square::WHITE;
     turn_ = Square::BLACK;
 }
 
 void Reversi::play() {
-    prompt();
-    char in;
-    std::cin >> in;
-    if (in == '')
+    while (!is_game_over()) {
+        prompt();
+        char in;
+        std::cin >> in;
+        if (in == 'q') {
+            break;
+        }
+        else if (in == 'c') {
+            save_checkpoint();
+        }
+        else if (in == 'u') {
+            undo();
+        }
+        else if (in == 'p') {
+            char row;
+            int col;
+            std::cin >> row >> col;
+            if (is_legal_choice(row, col, turn_)) {
+
+
+
+                turn_ = opposite_color(turn_);
+            }
+        }
+    }
 }
 
 void Reversi::prompt() const
@@ -255,10 +288,14 @@ bool Reversi::is_game_over() const
 }
 
 void Reversi::save_checkpoint() {
-
+    Checkpoint cp(board_, turn_);
+    history_.push_back(cp);
 }
 
 void Reversi::undo() {
-
+    Checkpoint cp = history_.front();
+    history_.pop_back();
+    board_ = cp.board_;
+    turn_ = cp.turn_;
 }
 

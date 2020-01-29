@@ -88,6 +88,8 @@ public:
 
     ~Board();
 
+    Board(const Board &b);
+
     /** Access private size as read-only. */
     size_t dimension() const {
         return dimension_;

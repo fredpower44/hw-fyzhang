@@ -48,13 +48,12 @@ std::ostream& operator<<(std::ostream& out, const Board& board) {
     }
     cout << std::endl;
     for (int i=0; i<board.dimension_; i++) {
-        cout << ('a'+i) << ':';
+        cout << (char)('a'+i) << ':';
         for (int j=0; j<board.dimension_; j++) {
             cout << board.squares_[i][j];
         }
         cout << std::endl;
     }
-    cout << std::endl;
     return out;
 }
 
