@@ -104,9 +104,7 @@ Square const& Board::operator()(char row, size_t column) const
 
 Board& Board::operator=(const Board &b) {
     dimension_ = b.dimension_;
-    squares_ = new Square*[dimension_];
     for (int i=0; i<dimension_; i++) {
-        squares_[i] = new Square[dimension_];
         for (int j=0; j<dimension_; j++) {
             squares_[i][j] = b.squares_[i][j];
         }
