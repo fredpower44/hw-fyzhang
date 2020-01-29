@@ -56,11 +56,10 @@ Board::Board(size_t s) {
     dimension_ = s;
     squares_ = new Square*[s];
     for (int i=0; i<s; i++) {
-        Square* temp = new Square[s];
+        squares_[i] = new Square[s];
         for (int j=0; j<s; j++) {
-            temp[j] = Square::FREE;
+            squares_[i][j] = Square::FREE;
         }
-        squares_[i] = temp;
     }
 }
 
@@ -72,14 +71,14 @@ Board::~Board() {
 }
 
 Board::Board(const Board &b) {
+    cout << "COPY" << endl;
     dimension_ = b.dimension_;
     squares_ = new Square*[dimension_];
     for (int i=0; i<dimension_; i++) {
-        Square* temp = new Square[dimension_];
+        squares_[i] = new Square[dimension_];
         for (int j=0; j<dimension_; j++) {
-            temp[j] = b.squares_[i][j];
+            squares_[i][j] = b.squares_[i][j];
         }
-        squares_[i] = temp;
     }
 }
 
@@ -101,6 +100,18 @@ Square const& Board::operator()(char row, size_t column) const
     }
     size_t row_index = row_to_index(row);
     return squares_[row_index][column - 1];
+}
+
+Board& Board::operator=(const Board &b) {
+    dimension_ = b.dimension_;
+    squares_ = new Square*[dimension_];
+    for (int i=0; i<dimension_; i++) {
+        squares_[i] = new Square[dimension_];
+        for (int j=0; j<dimension_; j++) {
+            squares_[i][j] = b.squares_[i][j];
+        }
+    }
+    return *this;
 }
 
 bool Board::is_legal_and_opposite_color(
@@ -231,7 +242,19 @@ void Reversi::play() {
             }
         }
     }
-
+    int whiteCnt = 0;
+    int blackCnt = 0;
+    for (int i=0; i<board_.dimension(); i++) {
+        for (int j=0; j<board_.dimension(); j++) {
+            if (board_('a'+i,j+1) == Square::WHITE) {
+                whiteCnt++;
+            }
+            else if (board_('a'+i,j+1) == Square::BLACK) {
+                blackCnt++;
+            }
+        }
+    }
+    win_loss_tie_message(whiteCnt, blackCnt);
 }
 
 void Reversi::prompt() const
@@ -315,14 +338,13 @@ bool Reversi::is_game_over() const
 }
 
 void Reversi::save_checkpoint() {
-    Board b(board_);
-    Checkpoint cp(b, turn_);
+    Checkpoint cp(board_, turn_);
     history_.push_back(cp);
 }
 
 void Reversi::undo() {
     if (!history_.empty()) {
-        Checkpoint cp = history_.front();
+        Checkpoint cp = history_.back();
         history_.pop_back();
         board_ = cp.board_;
         turn_ = cp.turn_;

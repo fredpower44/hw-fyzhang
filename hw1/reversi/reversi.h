@@ -104,6 +104,7 @@ public:
      */
     Square& operator()(char row, size_t column);
     Square const& operator()(char row, size_t column) const;
+    Board& operator=(const Board &b);
 
     /**
      * Checks if the square value at the specified row and col are legal
