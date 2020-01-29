@@ -20,4 +20,10 @@
 	to use friend functions.
 	b. Board
 5.
-	a. 
+	a. Record
+	b. Record
+	c. 
+	Wrapper::Wrapper(const Rational& major, const Rational& overall) : r(Record(major,overall))
+	{
+
+	}
