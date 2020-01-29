@@ -65,10 +65,10 @@ Board::Board(size_t s) {
 }
 
 Board::~Board() {
-    for (int i=0; i<dimension_; i++) {
-        delete[] squares_[i];
-    }
-    delete[] squares_;
+    //for (int i=0; i<dimension_; i++) {
+    //    delete[] squares_[i];
+    //}
+    //delete[] squares_;
 }
 
 Board::Board(const Board &b) {
@@ -219,6 +219,7 @@ void Reversi::play() {
                     if (found_opposite && found_same) {
                         cursor_row = row + direction_row[d];
                         cursor_column = col + direction_column[d];
+                        board_(row, col) = turn_;
                         while (board_.is_legal_and_opposite_color(cursor_row, cursor_column, turn_)) {
                             board_(cursor_row, cursor_column).flip();
                             cursor_row += direction_row[d];
@@ -226,8 +227,6 @@ void Reversi::play() {
                         }
                     }
                 }
-
-
                 turn_ = opposite_color(turn_);
             }
         }
@@ -315,14 +314,17 @@ bool Reversi::is_game_over() const
 }
 
 void Reversi::save_checkpoint() {
-    Checkpoint cp(board_, turn_);
+    Board b(board_);
+    Checkpoint cp(b, turn_);
     history_.push_back(cp);
 }
 
 void Reversi::undo() {
-    Checkpoint cp = history_.front();
-    history_.pop_back();
-    board_ = cp.board_;
-    turn_ = cp.turn_;
+    if (!history_.empty()) {
+        Checkpoint cp = history_.front();
+        history_.pop_back();
+        board_ = cp.board_;
+        turn_ = cp.turn_;
+    }
 }
 

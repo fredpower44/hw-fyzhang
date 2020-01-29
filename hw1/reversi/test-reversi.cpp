@@ -44,7 +44,7 @@ std::ostream& operator<<(std::ostream& out, const Board& board) {
     }
     cout << "  ";
     for (int i=0; i<board.dimension_; i++) {
-        cout << i%10;
+        cout << i%10 + 1;
     }
     cout << std::endl;
     for (int i=0; i<board.dimension_; i++) {
